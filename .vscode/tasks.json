@@ -1,0 +1,41 @@
+{
+    "version": "2.0.0",
+    "command": "cmd",
+    "isShellCommand": true,
+    "showOutput": "always",
+    "echoCommand": true,
+    "suppressTaskName": true,
+    "args": [
+        "/C"
+    ],
+    "tasks": [
+        {
+            "label": "Build Current ASM File",
+            "problemMatcher": {
+                "owner": "6502",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "severity": 3,
+                    "message": 4
+                }
+            },
+            "args": [
+                "\"C:\\Program Files (x86)\\BeebEm\\BeebAsm.exe\" -v -i ${fileBasenameNoExtension}.asm -do SSD\\${fileBasenameNoExtension}.ssd -boot Main"
+            ],
+            "isBuildCommand": true
+        },
+        {
+            "label": "Run Current ASM File '.ssd' in Emulator",
+            "isTestCommand": true,
+            "args": [
+                "\"C:\\Program Files (x86)\\BeebEm\\BeebEm.exe\" SSD\\${fileBasenameNoExtension}.ssd"
+            ]
+        }
+    ]
+}
