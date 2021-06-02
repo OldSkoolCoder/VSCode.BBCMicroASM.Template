@@ -10,7 +10,7 @@
     ],
     "tasks": [
         {
-            "label": "Assemble BBC Source",
+            "label": "KICK Assemble BBC Source",
             "type": "shell",
             "windows": {
                 "command": "java -cp C:\\Users\\John\\Desktop\\C64\\KickAssembler\\KickAss.jar kickass.KickAssembler ${fileBasenameNoExtension}.asm -binfile -odir .\\bin -o .\\bin\\Program.bin"
@@ -23,7 +23,7 @@
             }
         },
         {
-            "label": "Make BBC SSD",
+            "label": "KICK Make BBC SSD",
             "type": "shell",
             "windows": {
                 "command": "\"C:\\Program Files (x86)\\BeebEm\\BeebAsm.exe\" -v -i BAT\\BuildDisk.asm -do SSD\\${fileBasenameNoExtension}.ssd -boot Main"
@@ -35,11 +35,11 @@
                 "command": "echo Make BBC SSD Disk on MacOS!"
             },
             "dependsOn": [
-                "Assemble BBC Source"
+                "KICK Assemble BBC Source"
             ],
         },
         {
-            "label": "Build & Launch BBC Emulator",
+            "label": "KICK Build & Launch BBC Emulator",
             "type": "shell",
             "windows": {
                 "command": "\"C:\\Program Files (x86)\\BeebEm\\BeebEm.exe\" SSD\\${fileBasenameNoExtension}.ssd"
@@ -51,13 +51,41 @@
                 "command": "echo Launch Emulator on MacOs!"
             },
             "dependsOn": [
-                "Make BBC SSD"
+                "KICK Make BBC SSD"
             ],
             "problemMatcher": [],
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "BeebASM Build Current ASM File",
+            "problemMatcher": {
+                "owner": "6502",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "severity": 3,
+                    "message": 4
+                }
+            },
+            "args": [
+                "\"C:\\Program Files (x86)\\BeebEm\\BeebAsm.exe\" -v -i ${fileBasenameNoExtension}.asm -do SSD\\${fileBasenameNoExtension}.ssd -boot Main"
+            ],
+            "isBuildCommand": true
+        },
+        {
+            "label": "BeebASM Run Current ASM File '.ssd' in Emulator",
+            "isTestCommand": true,
+            "args": [
+                "\"C:\\Program Files (x86)\\BeebEm\\BeebEm.exe\" SSD\\${fileBasenameNoExtension}.ssd"
+            ]
         }
     ]
 }

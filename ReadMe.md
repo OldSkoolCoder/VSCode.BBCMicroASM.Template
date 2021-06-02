@@ -12,7 +12,14 @@ Included in this template are two "Hello World" examples.
 * File #2 (HelloWorld2.asm) showing how we used to do it in the Good 'ole Days nesting instructions on the sdame line.
 
 ## How to use the template ##
-With the New Improved Tasks, You just been to ``` CTRL + SHIFT + B ```, this will assemble in kick build the SSD and then Run in the emultator.
+With the New Improved Tasks For The **KICK** Assembler, You just been to ``` CTRL + SHIFT + B ```, this will assemble in kick build the SSD and then Run in the emultator.
+
+OR, For the **BeebASM** Assembler
+
+Just open the file you wan to assemble, press ``` CTRL +  SHIFT + R ``` (windows keys, other may vary).
+
+* Then select ``` BeebASM Build Current ASM File ``` to assemble the file and build a .ssd in the same name as the assembled file.
+* and then press ``` CTRL +  SHIFT + R ``` again, this time select ``` BeebASM Run Current ASM File '.ssd' in Emulator ``` to open up BeeBem and load the .ssd and run (if its an auto run disk)
 
 Please join me on my streams @https://www.twitch.tv/oldskoolcoder to get more information as we all learn the complexities of the BBC Micro and the other family members (BBC Master, Electron...)
 
