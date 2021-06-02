@@ -10,54 +10,54 @@
     ],
     "tasks": [
         {
-            "label": "Assemble ASM With Kick",
-            "problemMatcher": {
-                "owner": "6502",
-                "fileLocation": [
-                    "relative",
-                    "${workspaceRoot}"
-                ],
-                "pattern": {
-                    "regexp": "^(.*):(\\d+):\\s+(warning|error):\\s+(.*)$",
-                    "file": 1,
-                    "line": 2,
-                    "severity": 3,
-                    "message": 4
-                }
-            },
-            "command": "BAT\\Assemble.BAT",
+            "label": "Assemble BBC Source",
             "type": "shell",
-            "args": [
-                "${fileBasenameNoExtension}"
-                ]
-        },
-        {
-            "label": "Build Current ASM File",
-            "problemMatcher": {
-                "owner": "6502",
-                "fileLocation": [
-                    "relative",
-                    "${workspaceRoot}"
-                ],
-                "pattern": {
-                    "regexp": "^(.*):(\\d+):\\s+(warning|error):\\s+(.*)$",
-                    "file": 1,
-                    "line": 2,
-                    "severity": 3,
-                    "message": 4
-                }
+            "windows": {
+                "command": "java -cp C:\\Users\\John\\Desktop\\C64\\KickAssembler\\KickAss.jar kickass.KickAssembler ${fileBasenameNoExtension}.asm -binfile -odir .\\bin -o .\\bin\\Program.bin"
             },
-            "args": [
-                "\"C:\\Program Files (x86)\\BeebEm\\BeebAsm.exe\" -v -i ${fileBasenameNoExtension}.asm -do SSD\\${fileBasenameNoExtension}.ssd -boot Main"
-            ],
-            "isBuildCommand": true
+            "linux": {
+                "command": "java -cp ~/BBC/KickAssembler/KickAss.jar kickass.KickAssembler -binfile -odir ./bin ${file} -o ./bin/Program.bin"
+            },
+            "osx": {
+                "command": "echo Assemble on MacOS!"
+            }
         },
         {
-            "label": "Run Current ASM File '.ssd' in Emulator",
-            "isTestCommand": true,
-            "args": [
-                "\"C:\\Program Files (x86)\\BeebEm\\BeebEm.exe\" SSD\\${fileBasenameNoExtension}.ssd"
-            ]
+            "label": "Make BBC SSD",
+            "type": "shell",
+            "windows": {
+                "command": "\"C:\\Program Files (x86)\\BeebEm\\BeebAsm.exe\" -v -i BAT\\BuildDisk.asm -do SSD\\${fileBasenameNoExtension}.ssd -boot Main"
+            },
+            "linux": {
+                "command": "beebasm -v -i ./BAT/BuildDisk.asm -do ./SSD/${fileBasenameNoExtension}.ssd -boot Main"
+            },
+            "osx": {
+                "command": "echo Make BBC SSD Disk on MacOS!"
+            },
+            "dependsOn": [
+                "Assemble BBC Source"
+            ],
+        },
+        {
+            "label": "Build & Launch BBC Emulator",
+            "type": "shell",
+            "windows": {
+                "command": "\"C:\\Program Files (x86)\\BeebEm\\BeebEm.exe\" SSD\\${fileBasenameNoExtension}.ssd"
+            },
+            "linux": {
+                "command": "beebem ./SSD/${fileBasenameNoExtension}.ssd"
+            },
+            "osx": {
+                "command": "echo Launch Emulator on MacOs!"
+            },
+            "dependsOn": [
+                "Make BBC SSD"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }
