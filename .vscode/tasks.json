@@ -26,7 +26,7 @@
             "label": "KICK Make BBC SSD",
             "type": "shell",
             "windows": {
-                "command": "\"C:\\Program Files (x86)\\BeebEm\\BeebAsm.exe\" -v -i BAT\\BuildDisk.asm -do SSD\\${fileBasenameNoExtension}.ssd -boot Main"
+                "command": "BeebAsm.exe -v -i BAT\\BuildDisk.asm -do SSD\\${fileBasenameNoExtension}.ssd -boot Main"
             },
             "linux": {
                 "command": "beebasm -v -i ./BAT/BuildDisk.asm -do ./SSD/${fileBasenameNoExtension}.ssd -boot Main"
@@ -42,7 +42,7 @@
             "label": "KICK Build & Launch BBC Emulator",
             "type": "shell",
             "windows": {
-                "command": "\"C:\\Program Files (x86)\\BeebEm\\BeebEm.exe\" SSD\\${fileBasenameNoExtension}.ssd"
+                "command": "BeebEm.exe SSD\\${fileBasenameNoExtension}.ssd"
             },
             "linux": {
                 "command": "beebem ./SSD/${fileBasenameNoExtension}.ssd"

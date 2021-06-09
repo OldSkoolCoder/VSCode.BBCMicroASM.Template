@@ -1,4 +1,4 @@
-ORG &1000
+ORG &1900
 
 .CodeStart
 INCBIN "bin/Program.bin"
